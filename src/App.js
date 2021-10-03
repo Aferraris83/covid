@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useReducer } from 'react'
+
+import { Box } from '@mui/system'
+
+import { useCountries } from './hooks/useCountries'
+import Table from './components/Table'
+import './App.css'
+import withSpinner from './components/withSpinner'
+import { Context, globalReducer, globalState } from './context'
+
+const TableWithSpinner = withSpinner(Table)
 
 function App() {
+  const [state, dispatch] = useReducer(globalReducer, globalState)
+  const { continent } = state
+  const { data, isLoading } = useCountries(continent)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Context.Provider value={{ state, dispatch }}>
+      <Box padding="0 70px" display="flex" justifyContent="center" alignItems="center" height="100vh">
+        <TableWithSpinner isLoading={isLoading} rows={data} />
+      </Box>
+    </Context.Provider>
+  )
 }
 
-export default App;
+export default App
