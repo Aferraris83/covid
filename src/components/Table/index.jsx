@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { array } from 'prop-types'
+
 import { 
   Paper, 
   TablePagination, 
@@ -12,12 +14,12 @@ import { getComparator, stableSort, headCells } from './utils'
 import EnhancedTableHead from './EnhancedTableHead';
 import EnhancedTableToolbar from './EnhancedTableToolbar';
 import Row from './Row';
-
 function EnhancedTable({ rows }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('country');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  console.log(rows)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -76,5 +78,9 @@ function EnhancedTable({ rows }) {
     </Box>
   );
 }
+
+EnhancedTable.propTypes = {
+  rows: array.isRequired,
+};
 
 export default EnhancedTable;

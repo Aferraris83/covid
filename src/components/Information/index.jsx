@@ -1,5 +1,7 @@
-import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
+import { string, number } from "prop-types"; 
+
+import { Box } from "@mui/system";
 
 import { useHistory } from "../../hooks/useHistory";
 import { useVaccines } from "../../hooks/useVaccines";
@@ -38,5 +40,12 @@ const Information = ({ country, recovered, confirmed, population }) => {
     </Box>
   )
 }
+
+Information.propTypes = {
+  country: string.isRequired,
+  recovered: number.isRequired,
+  confirmed: number.isRequired,
+  population: number.isRequired,
+};
 
 export default Information;

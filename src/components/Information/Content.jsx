@@ -1,3 +1,5 @@
+import { string, number, shape } from "prop-types";
+
 import { Typography } from "@mui/material"
 import { Box } from "@mui/system"
 
@@ -19,5 +21,18 @@ const Content = ({ confirmed, recovered, perInhabitant, date, vaccines, perPeopl
     </>
   )
 }
+
+Content.propTypes = {
+  confirmed: number.isRequired,
+  recovered: number.isRequired,
+  perInhabitant: number.isRequired,
+  date: string.isRequired,
+  vaccines: shape({
+    administered: number.isRequired,
+    people_vaccinated: number.isRequired,
+    people_partially_vaccinated: number.isRequired,
+  }).isRequired,
+  perPeopleVaccine: number.isRequired,
+};
 
 export default Content;

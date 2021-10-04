@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { string, number } from "prop-types";
 
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Collapse, TableCell, TableRow } from "@mui/material";
@@ -51,5 +52,15 @@ function Row({ country, confirmed, continent, deaths, id, recovered, population 
     </>
   );
 }
+
+Row.propTypes = {
+  country: string.isRequired,
+  confirmed: number.isRequired,
+  deaths: number.isRequired,
+  continent: string.isRequired,
+  id: string.isRequired,
+  recovered: number.isRequired,
+  population: number.isRequired,
+};
 
 export default Row;
