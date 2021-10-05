@@ -3,20 +3,20 @@ import { string, number, shape } from "prop-types";
 import { Typography } from "@mui/material"
 import { Box } from "@mui/system"
 
-const Content = ({ confirmed, recovered, perInhabitant, date, vaccines, perPeopleVaccine}) => {
+import { countryCases, vaccinesData } from './utils'
+
+const Content = ({ vaccines, ...cases }) => {
   return (
     <>
       <Box>
-        <Typography>{`confirmados: ${confirmed}`}</Typography>
-        <Typography>{`recuperados: ${recovered}`}</Typography>
-        <Typography>{`casos cada 100.000 habitantes: ${perInhabitant}`}</Typography>
-        <Typography>{`fecha primer fallecido: ${date}`}</Typography>
+        {countryCases.map(({ id, label }) => (
+          <Typography key={id}>{`${label} ${cases[id]}`}</Typography>
+        ))}
       </Box>
       <Box>
-        <Typography>{`cantidad de vacunas disponibles: ${vaccines.administered}`}</Typography>
-        <Typography>{`total de personas vacunadas: ${vaccines.people_vaccinated}`}</Typography>
-        <Typography>{`parcial de personas vacunadas: ${vaccines.people_partially_vaccinated}`}</Typography>
-        <Typography>{`porcentaje de poblacion vacunadas: ${perPeopleVaccine} %`}</Typography>
+        {vaccinesData.map(({ id, label}) => (
+          <Typography key={id}>{`${label} ${vaccines[id]}`}</Typography>
+        ))}
       </Box>
     </>
   )
@@ -26,13 +26,16 @@ Content.propTypes = {
   confirmed: number.isRequired,
   recovered: number.isRequired,
   perInhabitant: number.isRequired,
-  date: string.isRequired,
+  date: string,
   vaccines: shape({
     administered: number.isRequired,
     people_vaccinated: number.isRequired,
     people_partially_vaccinated: number.isRequired,
   }).isRequired,
-  perPeopleVaccine: number.isRequired,
 };
+
+Content.defaultProps = {
+  date: '',
+}
 
 export default Content;

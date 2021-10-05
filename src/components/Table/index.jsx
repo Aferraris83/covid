@@ -19,7 +19,6 @@ function EnhancedTable({ rows }) {
   const [orderBy, setOrderBy] = useState('country');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  console.log(rows)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
