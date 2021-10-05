@@ -10,12 +10,22 @@ const Content = ({ vaccines, ...cases }) => {
     <>
       <Box>
         {countryCases.map(({ id, label }) => (
-          <Typography key={id}>{`${label} ${cases[id]}`}</Typography>
+          <Typography key={id}>
+            {label}
+            <Typography sx={{fontWeight: 700, margin: "0 10px"}} component="span" role={id}>
+              {cases[id]}
+            </Typography>
+          </Typography>
         ))}
       </Box>
       <Box>
-        {vaccinesData.map(({ id, label}) => (
-          <Typography key={id}>{`${label} ${vaccines[id]}`}</Typography>
+        {vaccines && vaccinesData.map(({ id, label}) => (
+          <Typography key={id}>
+            {label}
+            <Typography sx={{fontWeight: 700, margin: "0 10px"}} component="span" role={id}>
+              {vaccines[id]}
+            </Typography>
+          </Typography>
         ))}
       </Box>
     </>
@@ -23,19 +33,17 @@ const Content = ({ vaccines, ...cases }) => {
 }
 
 Content.propTypes = {
-  confirmed: number.isRequired,
-  recovered: number.isRequired,
-  perInhabitant: number.isRequired,
-  date: string,
+  cases: shape({
+    confirmed: number.isRequired,
+    recovered: number.isRequired,
+    perInhabitant: number.isRequired,
+    date: string.isRequired,
+  }),
   vaccines: shape({
     administered: number.isRequired,
     people_vaccinated: number.isRequired,
     people_partially_vaccinated: number.isRequired,
-  }).isRequired,
+  })
 };
-
-Content.defaultProps = {
-  date: '',
-}
 
 export default Content;

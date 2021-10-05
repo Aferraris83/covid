@@ -7,6 +7,7 @@ import { useHistory } from "../../hooks/useHistory";
 import { useVaccines } from "../../hooks/useVaccines";
 import withSpinner from "../withSpinner";
 import Content from "./Content";
+import { getKeyByValue } from "./utils";
 
 const ContentWithSpinner = withSpinner(Content)
 
@@ -17,10 +18,6 @@ const Information = ({ country, recovered, confirmed, population }) => {
   
   const perInhabitant = Math.round((confirmed/population)*100000)
  
-  function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
-  }
-
   useEffect(() => {
     if(vaccines) {
       vaccines.perPeopleVaccine = Math.round((vaccines.people_vaccinated/vaccines?.population)*100)

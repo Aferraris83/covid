@@ -35,3 +35,5 @@ export const vaccinesData = [
     label: 'cantidad de vacunas disponibles:',
   },
 ];
+
+export const getKeyByValue = (object, value) => Object.keys(object).find(key => object[key] === value)
